@@ -43,11 +43,13 @@ case "$1" in
 	#Attach created gadget device to the UDC driver
 	#UDC driver name obtained from "ls /sys/class/udc/"
 	sleep 2
-	echo musb-hdrc.1.auto > /sys/kernel/config/usb_gadget/g1/UDC 
+	echo musb-hdrc.1.auto > /sys/kernel/config/usb_gadget/g1/UDC
+	[ $? = 0 ] && echo "OK" || echo "FAIL"
 	;;
   stop)
 	printf "Stopping adb-daemon: "
 	killall -9 adbd
+	[ $? = 0 ] && echo "OK" || echo "FAIL"
 	;;
   restart|reload)
 	"$0" stop
